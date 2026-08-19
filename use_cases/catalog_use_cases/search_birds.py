@@ -31,16 +31,17 @@ class SearchBirdByName:
             data= self._repo.search_name(nome)
         except EntityNotFoundError:
             return Err(BirdsError.BIRD_NOT_FOUND)
-        except DatabaseError:
-            logger.error(
-                'erro inesperado no banco de dados', exc_info=True
-                )
-            return Err(BaseDomainError.DB_ERROR)
         except OperationalError:
             logger.critical(
                 'falha na conexao com o banco de dados', exc_info=True
                 )
             return Err(BaseDomainError.DB_CONECTION_ERROR) 
+        except DatabaseError:
+            logger.error(
+                'erro inesperado no banco de dados', exc_info=True
+                )
+            return Err(BaseDomainError.DB_ERROR)
+        
         logger.info('busca realizada com exito')
 
 
@@ -51,8 +52,8 @@ class SearchBirdByName:
                     bird_id= data_bird['id'],
                     usual_name= data_bird['nome_comum'],
                     cientific_name=data_bird['nome_cientifico'],
-                    species=data_bird['especie'],
-                    price= data_bird['preco'],
+                    bird_species=data_bird['especie'],
+                    bird_price= data_bird['preco'],
                     status='disponivel'
                 )
             )
@@ -75,8 +76,15 @@ class SearchBirdById:
             data_bird= self._repo.search_id(id)
         except EntityNotFoundError:
             return Err(BirdsError.BIRD_NOT_FOUND)
+        except OperationalError:
+            logger.critical('falha ao tentar conectar com o banco de dados', exc_info=True)
+            return Err(BaseDomainError.DB_CONECTION_ERROR)
+        except DatabaseError:
+            logger.error('erro inesperado com o banco de dados', exc_info=True)
+            return Err(BaseDomainError.DB_ERROR)
         logger.info('busca realizada com sucesso')
         logger.debug('retornando o resultado')
+       
         return Ok(
             BirdGetResponseDTO(
                 bird_id= data_bird['id'],
