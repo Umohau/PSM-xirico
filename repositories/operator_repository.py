@@ -298,12 +298,29 @@ Ensure that the same Connector object is used in both the InfraData and the Oper
                     
                     if res:
                         logger.debug("Failure: %s is not unique", key)
-                        raise DuplicateError(f"Operator with provided {key} already exists'")
+                        raise DuplicateError(f"Operator with provided {key} already exists")
                     logger.debug("Success: %s is unique", key)
                     
         return True                
             
+
+    def get_inactives(self) -> list[dict]:
+        '''
+        Retrieve all inactive operators.
+
+        Returns:
+            list[dict]: list of dictionary containing the inactive operator data.
             
+        Note:
+            returns any empty list if there are not inactive operators.
+        '''
+        get= self.tabela.select().where(self.tabela.c.ativo == False)
+        with self.engine.begin() as conexao:
+            res= conexao.execute(get)
+            output= res.fetchall()
+            return [inactivo._asdict() for inactivo in output]
+
+
     @property
     def total_records(self):
         """
