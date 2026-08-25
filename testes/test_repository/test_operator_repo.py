@@ -230,7 +230,21 @@ def test_get_ADMs_empty(repo):
     assert isinstance(adms, list)
     assert len(adms)==0    
             
-            
+
+def test_get_inactives_sucess(repo, dados):
+    id=repo.insert(dados)
+    repo.delete(id)
+    inactives= repo.get_inactives()
+    assert isinstance(inactives, list)
+    assert len(inactives)==1
+    assert isinstance(inactives[0], dict)
+
+def test_get_inactives_empy_list(repo):
+    inactives= repo.get_inactives()
+    assert isinstance(inactives, list)
+    assert len(inactives)==0
+
+
 def test_total_records(repo, dados):
     repo.insert(dados)
     assert repo.total_records ==1
