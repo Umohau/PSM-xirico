@@ -5,7 +5,7 @@ from typing import Annotated
 
 class ShipmentGetResponseDTO(BaseModel):
     order_id: str
-    shipment_id:str
+    shipment_id:int
     process_docs: bytes
 
 
