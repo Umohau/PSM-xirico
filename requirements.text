@@ -7,3 +7,7 @@ PyJWT>=2.0.0
 keyring>=24.0.0
 keyrings.alt>=5.0.0
 pydantic>=2.0.0
+pydantic-extra-types>=2.11.1
+email_validator>=2.3.0
+result>=0.17.0
+
