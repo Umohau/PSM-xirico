@@ -4,7 +4,7 @@ from Projeto_xirico.infra import Conector
 
 
 @pytest.fixture
-def mock_repo(mock_op_dados):
+def mock_repo():
     repo= Mock()
     repo.insert.return_value= 1
     repo.delete.return_value= 1
