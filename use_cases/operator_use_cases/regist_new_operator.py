@@ -1,18 +1,21 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
-from Projeto_xirico.exc import PermissionDeniedError, CredentialsError
 import logging
+from result import Result, Ok, Err
+from sqlalchemy.exc import OperationalError,  DatabaseError
+from jwt.exceptions import InvalidTokenError
 
+from Projeto_xirico.exc import PermissionDeniedError, CredentialsError, DuplicateError, InvalidOtpError
+from Projeto_xirico.domain_exceptions import BaseDomainError, OperatorError
+from Projeto_xirico.DTOs.baseDTO import InsertOutputDTO
 
 if TYPE_CHECKING:
     from Projeto_xirico.repositories.operator_repository import OperatorRepository
-    from Projeto_xirico.segurança import Autententicacao,  Auditoria
+    from Projeto_xirico.seguranca import Autententicacao,  Auditoria
     from Projeto_xirico.profile import Profile
-    from Projeto_xirico.notifications import     NotificatorEmail
-    from Projeto_xirico.schemes.operator_scheme import OperatorRegist
+    from Projeto_xirico.repositories.messageBox_repository import messageBoxRepository
+    from Projeto_xirico.DTOs.operator_DTOs import RegistOperatorDTO
     
-    
-
 logger=logging.getLogger(__name__)
 
         
@@ -32,7 +35,10 @@ class RegistNewOperator:
         self._audit= audit
         
         
-    def execute(self, dados:OperatorRegist, otp: str):
+    def execute(
+        self,
+        dados:RegistOperatorDTO
+        ) -> Result[InsertOutputDTO, BaseDomainError | OperatorError]:
         """
            
         Registers a new operator in the system.
@@ -70,23 +76,72 @@ class RegistNewOperator:
             - All operations are audited for traceability.
     
         """
-        dados_=dados.model_dump()
+        logger.debug('iniciando cadastro do opeprator')
+        Warnings: list[BaseDomainError| OperatorError]= list()
+        logger.debug('verificando permicao')
         if not self._profile.ADM:
-            raise PermissionDeniedError("nao operadores nao podem registrar novos operadores")
-        self._repo.check_unique(dados_) #verifica a unicidade dos dados
-        self._auth.verificar_otp(otp) #verifica o codigo otp
-        id_gerado= self._repo.insert(dados_) #persiste os dados no repositorio
-        self._audit.auditar(
-            operador= self._profile.id,
-            operacao= "regist new operator",
-            detalhes= f"registou  um operador com o id {id_gerado}")
+            logger.error('permicao negada')
+            return Err(BaseDomainError.PERMISSION_DENIED_ERROR)
+        try:
+            self._repo.check_unique(dados.model_dump()) #verifica a unicidade dos dados
+        except DuplicateError as e:
+            campos= ['email', 'telefone', 'BI']
+            for campo in campos:
+                key= f'OPERATOR_DUPLICATE_{campo.upper()}_ERROR'
+                if campo in str(e):
+                    chave: OperatorError= getattr(OperatorError, key)
+                    return Err(chave)
+        try:
+            logger.debug('verificando a identidade em 2FA')
+            self._auth.verificar_otp(dados.otp) #verifica o codigo otp
+        except InvalidTokenError:
+            logger.debug('codigo otp invalido')
+            return Err(BaseDomainError.INVALID_OTP_ERROR)
+        except InvalidOtpError:
+            logger.debug('codigo otp incorecto')
+            return Err(BaseDomainError.INCORRECT_OTP_ERROR)
+
+        try:
+            logger.debug(('persistindo os dados'))
+            id_gerado= self._repo.insert(dados.model_dump()) #persiste os dados no repositorio
+            logger.info(f'operador {dados.name}, registrado com id {id_gerado}')
+        except OperationalError:
+            logger.critical('erro ao conecta com o banco de dados', exc_info=True)
+            return Err(BaseDomainError.DB_CONECTION_ERROR)
+        except DatabaseError:
+            logger.error('erro inesperado no banco de dados', exc_info= True)
+            return Err(BaseDomainError.DB_ERROR)
+
+        try:
+            logger.debug('auditando a operacao  de registro')
+            self._audit.auditar(
+                operador= self._profile.id,
+                operacao= "regist new operator",
+                detalhes= f"registou  um operador com o id {id_gerado}")
+            logger.debug('operacao auditada co sucesso')
+        except DatabaseError:
+            logger.warning('falha ao auditar operacao de registro', exc_info=True)
+            Warnings.append(BaseDomainError.AUDIT_FAILED)
+
+        
         #adiciona uma mensagem de boas vindas na caixa para posterior envio
-        self._message_box.add_(
-            dados={
-                "to":dados.email,
-                "type":'welcome',
-                "name": dados.nome,
-                "channel": 'email'
-               } )
-        return id_gerado
+        try:
+            logger.debug('enfileirando email de boas vindas')
+            self._message_box.add_(
+                dados={
+                    "to":dados.email,
+                    "type":'welcome',
+                    "name": dados.name,
+                    "channel": 'email'
+                } )
+            logger.debug('email adicionado a fila com sucesso')
+        except DatabaseError:
+            logger.warning('falha ao enfileirar email de boas vindas', exc_info=True)
+            Warnings.append(BaseDomainError.MESSAGE_BOX_FAILLED)
+        logger.debug('retorndo o resultado da operacao')
+        return Ok(
+            InsertOutputDTO(
+            warnings= Warnings,
+            genereted_id= id_gerado
+        ))
         
