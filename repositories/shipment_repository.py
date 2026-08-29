@@ -171,7 +171,7 @@ Make sure to use the
          return dados[0]
          
   
-    def get_shipments_gid(self, operador_id):
+    def get_shipments_gid(self, operador_id) -> list[dict]:
         """
         Fetch all exports managed by the operator provided in `operador_id`.
 
