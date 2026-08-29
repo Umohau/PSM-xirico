@@ -90,7 +90,7 @@ Ensure that the same Connector object is used in both the InfraData and the Clie
             dados_ (dict): New data for the client.
         
         Returns:
-            list: List of updated fields.
+            int: the number of updated clients
         
         Raises:
             EntityNotFoundError: If no client is found with the provided ID or email.
@@ -111,7 +111,7 @@ Ensure that the same Connector object is used in both the InfraData and the Clie
             if not res:
                 logger.warning("Failed to update data for client - not found")
                 raise EntityNotFoundError(f"'No client found")
-            return list(dados_.keys()) 
+            return res 
                                     
             
     def search_id(self, id:int) -> dict:
