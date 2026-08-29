@@ -80,7 +80,7 @@ Ensure that the same Connector object is used in both the InfraData and the Clie
                 raise EntityNotFoundError("No client found for email: {email}")
 
                         
-    def update(self, dados_:dict,  id:int=None, email:str=None) -> list:
+    def update(self, dados_:dict,  id:int=None, email:str=None) -> int:
         """
         Update data for a client specified by either ID or email, using fields provided in the `dados` argument.
 
