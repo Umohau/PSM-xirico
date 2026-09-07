@@ -18,6 +18,7 @@ class UpdateQuantityBirdOfOrder:
         self._audit= audit
 
 
+    def _get_order_details
     def execute(self, order_id: str, new_quantity: dict):
         logger.debug('recuperando os dados do pedido')
         order= self._repo.get_order_oid(order_id) #recupera os dados do pedido
