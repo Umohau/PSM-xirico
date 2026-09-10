@@ -17,3 +17,11 @@ The system eliminates the manual work of writing documents by integrating:
 - **Secure storage** of all documentation for export processes (certificates, inspection reports, etc.).
 
 > **Current status:** We are finalizing the coding of the use cases and their tests.
+
+## ⚙️ Tech Stack and Prerequisites
+
+- **Python:** 3.10 or higher (tested with 3.11/3.12)
+- **Package Manager:** `pip` + `venv` (virtual environment required)
+- **Database:** SQLite (development) or PostgreSQL 14+ (production)
+- **Documents:** Microsoft Word (.docx) as base templates
+- **Operating System:** Windows 10/11 (native) or Linux (Ubuntu/Debian)
