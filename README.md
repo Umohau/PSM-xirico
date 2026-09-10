@@ -32,9 +32,11 @@ The system eliminates the manual work of writing documents by integrating:
 > You can still set up the environment and run the existing tests.
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/Umohau/PSM-xirico
 cd PSM-xirico
+```
 
 ### 2. Create and activate a virtual environment
 
@@ -63,3 +65,5 @@ pip install -r requirements.txt
 ```bash
 pytest
 ```
+
+> Once the main module is implemented, instructions to run the application will be added here.
