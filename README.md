@@ -3,7 +3,7 @@
 [![Status: Em Desenvolvimento](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)](https://github.com/Umohau/PSM-xirico)
 [![Versão](https://img.shields.io/badge/Versão-0.1.0--alpha-blue)](https://github.com/Umohau/PSM-xirico)
 [![Plataforma](https://img.shields.io/badge/Plataforma-Windows_|_Linux-lightgrey)]()
-[![Licença](https://img.shields.io/badge/Licença-Uso_Interno-red)]() 
+[![Licença](https://img.shields.io/badge/Licença-MIT-red)]() 
 
 
 
