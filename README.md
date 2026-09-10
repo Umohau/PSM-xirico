@@ -1,4 +1,4 @@
-🦜 Process management system xirico (PMS-Xirico)
+#🦜 Process management system xirico (PMS-Xirico)
 
 [![Status: Em Desenvolvimento](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow)](https://github.com/Umohau/Xirico_doc_automotion)
 [![Versão](https://img.shields.io/badge/Versão-0.1.0--alpha-blue)](https://github.com/Umohau/Xirico_doc_automotion)
@@ -9,7 +9,7 @@
 
 ## About the Project
 
-**PMS Xirico** is a desktop system developed to automate and centralize the operational management of Xirico, a company specialized in exporting small poultry.
+**PMS Xirico** is a desktop system developed to automate and centralize the operational management of Xirico, a company specialized in exporting small birds.
 
 The system eliminates the manual work of writing documents by integrating:
 - **Customer and Operator Registration**.
