@@ -35,3 +35,31 @@ The system eliminates the manual work of writing documents by integrating:
 ```bash
 git clone https://github.com/Umohau/PSM-xirico
 cd PSM-xirico
+
+### 2. Create and activate a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+**Windows:**
+```bash
+.venv\Scripts\activate
+```
+
+**Linux/macOS:**
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the tests
+
+```bash
+pytest
+```
