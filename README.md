@@ -25,3 +25,13 @@ The system eliminates the manual work of writing documents by integrating:
 - **Database:** SQLite (development) or PostgreSQL 14+ (production)
 - **Documents:** Microsoft Word (.docx) as base templates
 - **Operating System:** Windows 10/11 (native) or Linux (Ubuntu/Debian)
+
+## 🚀 Installation and Running
+
+> **Note:** The main application entry point is not available yet.  
+> You can still set up the environment and run the existing tests.
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/Umohau/Xirico_doc_automotion
+cd psm-xirico
