@@ -36,6 +36,7 @@ The system eliminates the manual work of writing documents by integrating:
 git clone https://github.com/Umohau/PSM-xirico
 cd PSM-xirico
 
+
 ### 2. Create and activate a virtual environment
 
 ```bash
