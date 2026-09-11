@@ -12,7 +12,7 @@ WARNINGS= Annotated[
 
 class UpdateOutputDTO(BaseModel):
     warnings: WARNINGS
-    updated_id: int= Field(
+    updated_id: Optional[int|str]= Field(
         title='updated id',
         description='id alvo do update'
     )
