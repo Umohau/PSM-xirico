@@ -20,11 +20,9 @@ logger= logging.getLogger(__name__)
 class SearchClietByName:
     def __init__(self,
         repo: ClientsRepository,
-        audit: Auditoria,
         profile: Profile
         ):
         self._repo= repo
-        self._audit= audit
         self._profile= profile
 
 
