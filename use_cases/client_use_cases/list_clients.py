@@ -10,7 +10,7 @@ from Projeto_xirico.domain_exceptions import BaseDomainError
 from Projeto_xirico.DTOs.client_DTOs import ClientGetResponseDTO
 
 if TYPE_CHECKING:
-    from Projeto_xirico.repositories.cliente_repository import ClientRepository
+    from Projeto_xirico.repositories.cliente_repository import ClientsRepository
     from Projeto_xirico.profile import Profile
     from Projeto_xirico.seguranca import Auditoria
 
@@ -20,13 +20,11 @@ logger= logging.getLogger(__name__)
 class ListClients:
     def __init__(
         self,
-        repo: ClientRepository,
-        profile: Profile,
-        audit: Auditoria
+        repo: ClientsRepository,
+        profile: Profile
     ):
         self._repo= repo
         self._profile= profile
-        self._audit= audit
 
 
     def execute(self) ->Result[List[ClientGetResponseDTO], BaseDomainError]:

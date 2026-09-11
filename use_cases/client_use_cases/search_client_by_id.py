@@ -20,11 +20,9 @@ logger= logging.getLogger(__name__)
 class SearchClientById:
     def __init__(self,
         repo: ClientRepository,
-        audit: Auditoria,
         profile: Profile
         ):
         self._repo= repo
-        self._audit= audit
         self._profile= profile
 
 
@@ -35,7 +33,7 @@ class SearchClientById:
         try:
             client= self._repo.search_by_id(client_id)
             logger.info(
-                'a busca encontrou %d clientes para o nome: %s', len(clients), name
+                'a busca encontrou o cliente de id:%s',client_id
             )
         except EntityNotFoundError:
             return Err(ClientError.CLIENT_NOT_FOUND_ERROR)
