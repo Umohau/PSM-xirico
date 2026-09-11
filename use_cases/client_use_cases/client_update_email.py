@@ -37,7 +37,7 @@ class ClientUpdateEmail:
         new_email: dict={'email': dados.email}
 
         try:
-            logger.deebug(
+            logger.debug(
                 'recuperando email actual'
             )
             old_email: str= self._repo.search_id(dados.client_id).get('email')
@@ -86,10 +86,8 @@ class ClientUpdateEmail:
                 warnings= warnings,
                 updated_id=dados.client_id,
                 old_data=old_email,
-                new_data= dados.emial,
+                new_data= dados.email,
                 effect=effect
             )
         )
     
-        
-        return effect
