@@ -26,7 +26,7 @@ class ListClientShipments:
         )
         try:
 
-            shipments= self._repo.get_shipments_gid(client_id)
+            shipments= self._repo.get_shipments_cl(client_id)
             logger.info(
                 'a busca por exportacoes  do cliente id:%d encontrou %d resultados', client_id, len(shipments)
             )
