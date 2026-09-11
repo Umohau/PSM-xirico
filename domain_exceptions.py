@@ -10,6 +10,12 @@ class BaseDomainError(Enum):
     INVALID_OTP_ERROR= 'codogo otp invalido'
     ATTEMPTS_EXCEDED_ERROR= 'atingiu o limite de tentativas'
     INCORRECT_OTP_ERROR= 'codigo otp incorrecto'
+    DUPLICATE_TELEFONE_ERROR= 'o numero telefonico ja se encontra cadastrado'
+    DUPLICATE_EMAIL_ERROR= "o email fornecido ja se encontra cadastrado",
+    ORPHAN_DATA_ERROR= 'a operacao deixou dados orfaos, reversao manual necessaria'
+    PROTETECD_ENTITY_ERROR= 'entidades protejidas nao podem ser modificados'
+    INVALID_INPUT_DATA= 'dados de entrada invalidos'
+
 
 class BirdsError(Enum):
     BIRD_ALREAD_EXISTS= "Ave ja existente no catalogo"
@@ -30,3 +36,8 @@ class ShipmentsError(Enum):
 
 class OrderError(Enum):
     ORDER_NOT_FOUND_ERROR= 'nao foram encontrados pedidos correspondentes'
+
+
+class ClientError(Enum):
+    CLIENT_ALREAD_EXISTS_ERROR= "O cliente ja se encontra cadastrado"
+    CLIENT_NOT_FOUND_ERROR= 'client nao encontrado' 
