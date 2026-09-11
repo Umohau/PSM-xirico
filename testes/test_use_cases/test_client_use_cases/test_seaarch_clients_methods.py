@@ -1,21 +1,12 @@
 import pytest
-from Projeto_xirico.use_cases.client_use_cases.search_client_by_name import SearchClietByName
-from Projeto_xirico.use_cases.client_use_cases.search_client_by_id import SearchClientById
+
+
 from Projeto_xirico.use_cases.client_use_cases.list_clients import ListClients
-
-
-@pytest.fixture
-def search_clients_by_name(mock_audit, mock_repo, mock_profile):
-    return SearchClietByName(repo= mock_repo, audit= mock_audit, profile= mock_profile)
 
 
 @pytest.fixture
 def search_client_by_id(mock_audit, mock_repo, mock_profile):
     return SearchClientById(repo= mock_repo, profile= mock_profile, audit= mock_audit)
-
-@pytest.fixture
-def list_clients(mock_repo, mock_profile, mock_audit):
-    return ListClients(repo= mock_repo, profile= mock_profile, audit= mock_audit)
 
 
 def test_search_clients_by_name_sucess(search_clients_by_name, mock_repo, mock_audit):

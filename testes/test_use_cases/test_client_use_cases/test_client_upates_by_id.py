@@ -1,34 +1,15 @@
 import pytest
 from Projeto_xirico.use_cases.client_use_cases.client_update_address_by_id import ClientUpdateAdressById
-from Projeto_xirico.use_cases.client_use_cases.client_update_domain_by_id import ClientUpdateDomainById
-from Projeto_xirico.use_cases.client_use_cases.client_update_email import ClientUpdateEmail
-from Projeto_xirico.use_cases.client_use_cases.client_update_name_by_id import ClientUpdateNameById
-from Projeto_xirico.use_cases.client_use_cases.client_update_telephone_by_id import ClientUpdateTelephoneBYId
 
 
-@pytest.fixture
-def client_update_address_by_id(mock_repo, mock_profile, mock_audit):
-    return ClientUpdateAdressById(repo= mock_repo, audit= mock_audit, profile= mock_profile)
 
 
-@pytest.fixture
-def client_update_domain_by_id(mock_audit, mock_repo, mock_profile):
-    return ClientUpdateDomainById(repo= mock_repo, audit= mock_audit, profile= mock_profile)
 
 
-@pytest.fixture
-def client_update_email(mock_repo, mock_profile, mock_audit):
-    return ClientUpdateEmail(repo= mock_repo, profile= mock_profile, audit= mock_audit)
 
 
-@pytest.fixture
-def client_update_name_by_id(mock_audit, mock_repo, mock_profile):
-    return ClientUpdateNameById(repo= mock_repo, profile= mock_profile, audit= mock_audit)
 
 
-@pytest.fixture
-def client_update_telephone_by_id(mock_repo, mock_audit, mock_profile):
-    return ClientUpdateTelephoneBYId(repo= mock_repo, audit= mock_audit, profile= mock_profile)
 
 
 def test_update_client_address_by_id_sucess(client_update_address_by_id, mock_audit, mock_repo):
