@@ -41,6 +41,32 @@ Make sure to use the
                 logger.warning('Failed to insert export: ParmError - %s', e.params)
                 raise
 
+    
+
+    def delete(self, expo_id: int) -> int:
+        """
+        Deleta um registro da tabela exportacoes pelo seu id.
+        
+        Args:
+            expo_id(int): id do processo a ser excluido.
+            
+        Returns:
+            int: numero de processos excluidos
+            
+        Raises:
+            EntityNotFoundError: se o processo nao for encontrado na tabela.
+        """
+        deletar= self.tabela.delete().where(self.tabela.c.exportacao_id == expo_id)
+        
+        with self.engine.begin() as conexao:
+            res= conexao.execute(deletar).rowcount
+            
+            if not res:
+                logger.warning("falha: nao foi possivel deletar exportacao id: %d nao encontrada", expo_id)
+                raise EntityNotFoundError("exportacao nao econtrada")
+            return res
+
+
 
     def update(self, dados:dict, expo_id: int) -> list:
         actualizar=self.tabela.update().where(self.tabela.c.exportacao_id== expo_id)
