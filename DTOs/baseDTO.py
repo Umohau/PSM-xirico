@@ -33,9 +33,9 @@ class UpdateOutputDTO(BaseModel):
 
 class InsertOutputDTO(BaseModel):
     warnings: WARNINGS
-    genereted_id: int=Field(
+    genereted_id: Optional[int|str]=Field(
         title='genereted_id',
         description='id gerado durante a insersao',
-        examples=[1]
+        examples=[1, '1']
     )
 
