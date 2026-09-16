@@ -62,6 +62,7 @@ class OrderRegistDTO(BaseModel):
 
 class OrderUpdateDTO(BaseModel):
     order_id: ORDER_ID
+    otp: Optional[str]=None
     date_of_regist: Optional[DATE]= None
     sent_date: Optional[DATE]= None
     menager_id: Optional[int]= None
