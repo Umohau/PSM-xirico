@@ -95,7 +95,7 @@ class CancelOrder:
         #verifica a permissao para liberar cancelamento do pedido
         logger.debug('verificando permicao')
         if not order_menager == operator_id and not self._profile.ADM:
-            logger.warnig('permissao negada ao operador: %s para cancelar o pedido %s',operator_id, order_id)
+            logger.warning('permissao negada ao operador: %s para cancelar o pedido %s',operator_id, order_id)
             return Err(BaseDomainError.PERMISSION_DENIED_ERROR)
         logger.info(
             'permissao concedida para cancelar pedido %s', order_id
