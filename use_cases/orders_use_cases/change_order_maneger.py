@@ -186,7 +186,7 @@ class ChangeOrderMenager:
         #verifica a permissao para liberar edicao do pedido
         logger.debug('verificando permicao')
         if not order_menager == operator_id and not self._profile.ADM:
-            logger.warnig('permissao negada ao operador: %s para trocar o gestor do pedido %s',operator_id, dados.order_id)
+            logger.warning('permissao negada ao operador: %s para trocar o gestor do pedido %s',operator_id, dados.order_id)
             return Err(BaseDomainError.PERMISSION_DENIED_ERROR)
 
         # confirma a identidade do novo gestor
@@ -222,7 +222,12 @@ class ChangeOrderMenager:
         effect= effect_.unwrap()
 
         #registra a accao em log de auditoria
-        self._auditar()
+        self._auditar(
+            operator_id= operator_id,
+            order_id=dados.order_id,
+            old_menager= order_menager,
+            new_menager= dados.menager_id
+        )
 
         #enfileira uma notificacao para o gestor anterior e o novo gestor
         self._push_notifications(

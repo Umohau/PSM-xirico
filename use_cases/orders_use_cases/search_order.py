@@ -33,9 +33,11 @@ class SearcbOrdersByOrderId:
             logger.error(
                 'erro inesperado com o banco de dados', exc_info=True
             )
+            return Err(BaseDomainError.DB_ERROR)
+        
         return Ok(
             OrderGetResponseDTO(
-                order_id= order['order_id'],
+                id= order['order_id'],
                 date_of_regist= order['registado_at'],
                 sent_date=order['enviado_at'],
                 menager_id= order['gestor_id'],

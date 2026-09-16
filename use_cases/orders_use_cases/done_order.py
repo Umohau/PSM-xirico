@@ -39,7 +39,7 @@ class DoneOrder:
             logger.debug('registrando o processo da exportacao do pedido %s', order_id)
             id_gerado= self._shipment.insert(processo)
             self._shipment_id= id_gerado
-            logger.info('shipment do pedido: %s foi registrado com id: %s', id)
+            logger.info('shipment do pedido: %s foi registrado com id: %s', order_id, id )
         except DatabaseError:
                 logger.critical(
                     'erro inesperado com o banco de dados ao registrar exportacao', exc_info=True
@@ -150,6 +150,8 @@ class DoneOrder:
             recovery=self._reveret_shipment()
             if is_err(recovery):
                 self._warnings.append(BaseDomainError.ORPHAN_DATA_ERROR)
+            else:
+                return Err(BaseDomainError.OPEERATION_FAILLED)
 
         #audita a operacao
         self._auditar(order_id)

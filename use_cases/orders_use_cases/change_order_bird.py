@@ -80,7 +80,7 @@ class ChangeOrderBird:
             logger.warning(
                 'falha ao auditar a troca de ave de um pedido'
             )
-            self._warninigs.append(BaseDomainError.AUDIT_FAILED)
+            self._warnings.append(BaseDomainError.AUDIT_FAILED)
 
     def execute(self, dados: OrderUpdateDTO) -> Result[UpdateOutputDTO, BaseDomainError| OrderError]:
         logger.debug(
@@ -122,8 +122,8 @@ class ChangeOrderBird:
         self._auditar(new_id=dados.bird, bird_id=order['ave_id'], order_id= dados.order_id)
         return Ok(
             UpdateOutputDTO(
-                new_data= dados.bird,
-                old_data= order['ave_id'],
+                new_data= str(dados.bird),
+                old_data= str(order['ave_id']),
                 effect= effect,
                 warnings= self._warnings,
                 updated_id= dados.order_id
