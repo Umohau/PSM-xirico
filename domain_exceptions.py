@@ -15,6 +15,7 @@ class BaseDomainError(Enum):
     ORPHAN_DATA_ERROR= 'a operacao deixou dados orfaos, reversao manual necessaria'
     PROTETECD_ENTITY_ERROR= 'entidades protejidas nao podem ser modificados'
     INVALID_INPUT_DATA= 'dados de entrada invalidos'
+    OPEERATION_FAILLED= 'a operacao falhou ou foi revertida'
 
 
 class BirdsError(Enum):
