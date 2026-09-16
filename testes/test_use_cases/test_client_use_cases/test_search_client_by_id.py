@@ -6,6 +6,7 @@ from Projeto_xirico.domain_exceptions import BaseDomainError, ClientError
 from Projeto_xirico.use_cases.client_use_cases.search_client_by_id import SearchClientById
 from Projeto_xirico.DTOs.client_DTOs import ClientGetResponseDTO
 
+
 dados={
     'id':1,
     'nome': 'cliente1',
