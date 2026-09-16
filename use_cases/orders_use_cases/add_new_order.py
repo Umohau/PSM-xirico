@@ -19,7 +19,7 @@ logger= logging.getLogger(__name__)
 class AddNewOrder:
     def __init__(self, repo: OrdersRepository, profile: Profile, audit: Auditoria):
         self._repo= repo
-        self._profile= Profile
+        self._profile= profile
         self._audit= audit
 
 
