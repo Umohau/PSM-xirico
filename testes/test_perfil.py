@@ -29,7 +29,7 @@ class TestPfile:
 'ADM':False, 'ativo':True}
          mock=Mock()
          mock.actualizar.return_value=1
-         mock.buscar_id.return_value=dados2
+         mock.search_id.return_value=dados2
          return mock
          
     @pytest.fixture
