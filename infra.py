@@ -28,23 +28,10 @@ def localizar_app():
         return Path(__file__).parent
         
 
-def setup_logging():
-    load_dotenv("config.env")
-    log_level_str = os.getenv("LOG_LEVEL", "DEBUG")
-    log_level = getattr(logging, log_level_str, logging.DEBUG)  
-    
-    logging.basicConfig(
-        format="%(levelname)s: %(name)s: %(message)s: %(asctime)s",
-        datefmt="%H:%M:%S",
-        level=log_level
-    )
-
-# Chama no start do programa
-setup_logging()
-
 def gerar_ord_id():
     u="".join(secrets.choice(string.digits) for _ in range(6))
     return "ORD"+u       
+
     
 #conector     
 class  Conector:
@@ -222,8 +209,17 @@ class InfraGerador:
         
         for caminho in caminhos:
             try:
+                logger.debug(
+                    'criando  o pasta[%s]', caminho
+                )
                 (self._base/'documentos gerados'/caminho).mkdir(parents=True, exist_ok=True)
+                logger.info(
+                    'pasta [%s] criado com sucesso', caminho
+                )
             except OSError as e: 
+               logger.warning(
+                   'falha ao cria pasta [%s]', caminho
+               )
                logger.error("erro ao inicializar caminhos. ERRO: %s", e.errno)
                raise
 
@@ -234,7 +230,13 @@ class InfraAuditoria:
     
     def criar_pasta(self):
         try:
+                logger.debug(
+                    'crinado pasta para os arquivos de auditoria'
+                )
                 (self._base/'aud').mkdir(parents=True, exist_ok=True)
+                logger.info(
+                    'pastas para arquivos de auditoria criadas com sucesso'
+                )
         except OSError as e: 
                logger.error("erro ao criar pasta de auditoria. ERRO: %s", e.errno)
                raise
