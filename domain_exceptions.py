@@ -42,3 +42,9 @@ class OrderError(Enum):
 class ClientError(Enum):
     CLIENT_ALREAD_EXISTS_ERROR= "O cliente ja se encontra cadastrado"
     CLIENT_NOT_FOUND_ERROR= 'client nao encontrado' 
+
+
+class SessionError(Enum):
+    CREDENTIALS_ERROR= 'credenciais de acesso incorrectas ou invalidas'
+    LOGIN_BLOCKED_ERROR= 'demasiadas tentativas tente novamente daque 24 horas'
+    UNTRACED_SESSION_ERROR= 'sessao nao autorizada ou nao monitorada, alerta para invasao!'
