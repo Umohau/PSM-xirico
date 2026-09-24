@@ -58,7 +58,7 @@ dados={
     'telefone':'+258852702385',
     'email':'exemplo@gmail.com',
     'endereco': 'maputo,Moamba, Bairro exemplo',
-    'BI':'100234567213A',
+    'identificacao':'100234567213A',
     'activo': False,
     'ADM': False
  }

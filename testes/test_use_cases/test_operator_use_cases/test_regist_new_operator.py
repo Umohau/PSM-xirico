@@ -38,7 +38,8 @@ def dados():
         operator_email= 'exemplo@gmail.com',
         morada= 'maputo,Moamba, Bairro exemplo',
         BI='100234567213A',
-        codigo='00000000' 
+        codigo='00000000' ,
+        password='senhadousuario'
     )
 
 
