@@ -146,6 +146,7 @@ class RegistOperatorDTO(BaseModel):
     adress: ADRESSES
     BI: OPERATOR_PERSONAL_ID
     otp:OTP
+    password: str
 
 
 class ReactivateOperatorDTO(BaseModel):
