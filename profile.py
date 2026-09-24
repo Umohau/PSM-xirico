@@ -44,7 +44,7 @@ class Profile:
 
     def _obter_dados(self):
         if  self._dados_cache is None:
-            self._dados_cache= self._repo_operador.buscar_id(self._id)
+            self._dados_cache= self._repo_operador.search_id(self._id)
         return self._dados_cache
         
         
