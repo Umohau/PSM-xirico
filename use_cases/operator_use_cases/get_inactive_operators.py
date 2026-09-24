@@ -65,7 +65,7 @@ class GetInactiveOperators:
                 operator_email= inactive['email'],
                 phone_number= inactive['telefone'],
                 morada= inactive['endereco'],
-                BI= inactive['BI']
+                BI= inactive['identificacao']
                 )
             )
         return Ok(inactives_dtos)

@@ -73,7 +73,7 @@ class SearchByName:
                     operator_email= operator['email'],
                     phone_number= operator['telefone'],
                     morada= operator['endereco'],
-                    BI= operator['BI']
+                    BI= operator['identificacao']
                     )
                 )
             else:
